@@ -91,6 +91,36 @@ library(dplyr)
 library(lubridate)  
 ```
 
+```R
+Registered S3 methods overwritten by 'dbplyr':
+  method         from
+  print.tbl_lazy     
+  print.tbl_sql      
+── Attaching packages ─────────────────────────────────────────────────── tidyverse 1.3.1 ──
+✓ ggplot2 3.3.5     ✓ purrr   0.3.4
+✓ tibble  3.1.6     ✓ dplyr   1.0.8
+✓ tidyr   1.2.0     ✓ stringr 1.4.0
+✓ readr   2.1.2     ✓ forcats 0.5.1
+── Conflicts ────────────────────────────────────────────────────── tidyverse_conflicts() ──
+x dplyr::filter() masks stats::filter()
+x dplyr::lag()    masks stats::lag()
+
+Attaching package: ‘janitor’
+
+The following objects are masked from ‘package:stats’:
+
+    chisq.test, fisher.test
+
+
+Attaching package: ‘lubridate’
+
+The following objects are masked from ‘package:base’:
+
+    date, intersect, setdiff, union
+```
+
+
+
 3. Importar datos
 
 ```R
@@ -151,7 +181,7 @@ $ member_casual      <chr> "member", "member", "member", "member", "member", "me
 
 Para realizar la etapa del proceso de limpieza de datos se utiliza el lenguaje de programacion R y siguiendo los siguientes pasos:
 
-1. Su utiliza la funcion `rbind()` para combinar los 12 meses.
+1. Su utiliza la funcion `rbind()` para combinar los 12 meses. Se observa que el conjunto de datos tiene **5754248** observaciones.
 
 ```R
 trip_data <- rbind(mes_01, mes_02, mes_03, mes_04, mes_05, mes_06, mes_07, mes_08, mes_09, mes_10, mes_11, mes_12)
@@ -161,6 +191,13 @@ trip_data <- rbind(mes_01, mes_02, mes_03, mes_04, mes_05, mes_06, mes_07, mes_0
 
 ```R
 colnames(trip_data)
+```
+
+```R
+ [1] "ride_id"            "rideable_type"      "started_at"         "ended_at"          
+ [5] "start_station_name" "start_station_id"   "end_station_name"   "end_station_id"    
+ [9] "start_lat"          "start_lng"          "end_lat"            "end_lng"           
+[13] "member_casual"   
 ```
 
 3.  Eliminar las columnas que no son necesarias `start_lat, start_lng, end_lat, end_lng`:
@@ -176,6 +213,10 @@ trip_data <- trip_data %>%
 dim(trip_data) 
 ```
 
+```R
+[1] 5754248       9
+```
+
 5. Observamos las primeras 6 filas del dataframe
 
 ```R
@@ -188,10 +229,44 @@ head(trip_data)
 str(trip_data)
 ```
 
-7. Obtenemos un resumen estadístico de los datos
+```R
+tibble [5,754,248 × 9] (S3: tbl_df/tbl/data.frame)
+ $ ride_id           : chr [1:5754248] "E1E065E7ED285C02" "1602DCDC5B30FFE3" "BE7DD2AF4B55C4AF" "A1789BDF844412BE" ...
+ $ rideable_type     : chr [1:5754248] "classic_bike" "classic_bike" "classic_bike" "classic_bike" ...
+ $ started_at        : POSIXct[1:5754248], format: "2022-02-19 18:08:41" "2022-02-20 17:41:30" "2022-02-25 18:55:56" ...
+ $ ended_at          : POSIXct[1:5754248], format: "2022-02-19 18:23:56" "2022-02-20 17:45:56" "2022-02-25 19:09:34" ...
+ $ start_station_name: chr [1:5754248] "State St & Randolph St" "Halsted St & Wrightwood Ave" "State St & Randolph St" "Southport Ave & Waveland Ave" ...
+ $ start_station_id  : chr [1:5754248] "TA1305000029" "TA1309000061" "TA1305000029" "13235" ...
+ $ end_station_name  : chr [1:5754248] "Clark St & Lincoln Ave" "Southport Ave & Wrightwood Ave" "Canal St & Adams St" "Broadway & Sheridan Rd" ...
+ $ end_station_id    : chr [1:5754248] "13179" "TA1307000113" "13011" "13323" ...
+ $ member_casual     : chr [1:5754248] "member" "member" "member" "member" ...
+```
+
+7. Obtenemos un primer resumen estadístico de los datos
 
 ```R
 summary(trip_data) 
+```
+
+```R
+   ride_id          rideable_type        started_at                 
+ Length:5754248     Length:5754248     Min.   :2022-02-01 00:03:18  
+ Class :character   Class :character   1st Qu.:2022-06-02 15:18:09  
+ Mode  :character   Mode  :character   Median :2022-07-27 22:50:40  
+                                       Mean   :2022-07-29 13:28:03  
+                                       3rd Qu.:2022-09-22 20:34:47  
+                                       Max.   :2023-01-31 23:56:09  
+    ended_at                   start_station_name start_station_id   end_station_name  
+ Min.   :2022-02-01 00:09:37   Length:5754248     Length:5754248     Length:5754248    
+ 1st Qu.:2022-06-02 15:37:50   Class :character   Class :character   Class :character  
+ Median :2022-07-27 23:09:33   Mode  :character   Mode  :character   Mode  :character  
+ Mean   :2022-07-29 13:47:21                                                           
+ 3rd Qu.:2022-09-22 20:53:25                                                           
+ Max.   :2023-02-04 04:27:03                                                           
+ end_station_id     member_casual     
+ Length:5754248     Length:5754248    
+ Class :character   Class :character  
+ Mode  :character   Mode  :character  
 ```
 
 8. Agregar columnas que muestren la fecha, mes, día y año de cada viaje. Esto nos permitirá agregar datos de viaje para cada mes, día o año... antes de completar estas operaciones solo podíamos agregar a nivel de viaje.
@@ -228,6 +303,27 @@ trip_data$ride_length <- difftime(trip_data$ended_at,trip_data$started_at)
 str(trip_data)
 ```
 
+```R
+tibble [5,754,248 × 16] (S3: tbl_df/tbl/data.frame)
+ $ ride_id           : chr [1:5754248] "E1E065E7ED285C02" "1602DCDC5B30FFE3" "BE7DD2AF4B55C4AF" "A1789BDF844412BE" ...
+ $ rideable_type     : chr [1:5754248] "classic_bike" "classic_bike" "classic_bike" "classic_bike" ...
+ $ started_at        : POSIXct[1:5754248], format: "2022-02-19 18:08:41" "2022-02-20 17:41:30" "2022-02-25 18:55:56" ...
+ $ ended_at          : POSIXct[1:5754248], format: "2022-02-19 18:23:56" "2022-02-20 17:45:56" "2022-02-25 19:09:34" ...
+ $ start_station_name: chr [1:5754248] "State St & Randolph St" "Halsted St & Wrightwood Ave" "State St & Randolph St" "Southport Ave & Waveland Ave" ...
+ $ start_station_id  : chr [1:5754248] "TA1305000029" "TA1309000061" "TA1305000029" "13235" ...
+ $ end_station_name  : chr [1:5754248] "Clark St & Lincoln Ave" "Southport Ave & Wrightwood Ave" "Canal St & Adams St" "Broadway & Sheridan Rd" ...
+ $ end_station_id    : chr [1:5754248] "13179" "TA1307000113" "13011" "13323" ...
+ $ member_casual     : chr [1:5754248] "member" "member" "member" "member" ...
+ $ date              : Date[1:5754248], format: "2022-02-19" "2022-02-20" "2022-02-25" ...
+ $ month             : chr [1:5754248] "02" "02" "02" "02" ...
+ $ day               : chr [1:5754248] "19" "20" "25" "14" ...
+ $ year              : chr [1:5754248] "2022" "2022" "2022" "2022" ...
+ $ day_of_week       : chr [1:5754248] "Saturday" "Sunday" "Friday" "Monday" ...
+ $ season            : chr [1:5754248] "winter" "winter" "winter" "winter" ...
+ $ ride_length       : 'difftime' num [1:5754248] 915 266 818 417 ...
+  ..- attr(*, "units")= chr "secs"
+```
+
 12. Convertir la columna `ride_length` de Factor a numeric poder hacer cálculos en los datos
 
 ```R
@@ -255,6 +351,17 @@ trip_data_v2 <- trip_data_v2 %>%
 colSums(is.na(trip_data_v2))
 ```
 
+```R
+           ride_id      rideable_type         started_at           ended_at 
+                 0                  0                  0                  0 
+start_station_name   start_station_id   end_station_name     end_station_id 
+                 0                  0             473199             473199 
+     member_casual               date              month                day 
+                 0                  0                  0                  0 
+              year        day_of_week             season        ride_length 
+                 0                  0                  0                  0 
+```
+
 ## 4. Análisis de datos
 
 1. Análisis descriptivo en `ride_length` (todas las cifras en segundos)
@@ -276,20 +383,106 @@ min(trip_data_v2$ride_length)
 summary(trip_data_v2)
 ```
 
+```R
+   ride_id          rideable_type        started_at                 
+ Length:4910646     Length:4910646     Min.   :2022-02-01 00:03:18  
+ Class :character   Class :character   1st Qu.:2022-06-03 10:02:49  
+ Mode  :character   Mode  :character   Median :2022-07-27 16:26:22  
+                                       Mean   :2022-07-29 14:23:08  
+                                       3rd Qu.:2022-09-22 09:10:43  
+                                       Max.   :2023-01-31 23:53:18  
+    ended_at                   start_station_name start_station_id   end_station_name  
+ Min.   :2022-02-01 00:09:37   Length:4910646     Length:4910646     Length:4910646    
+ 1st Qu.:2022-06-03 10:23:56   Class :character   Class :character   Class :character  
+ Median :2022-07-27 16:43:07   Mode  :character   Mode  :character   Mode  :character  
+ Mean   :2022-07-29 14:43:31                                                           
+ 3rd Qu.:2022-09-22 09:28:29                                                           
+ Max.   :2023-02-04 04:27:03                                                           
+ end_station_id     member_casual           date               month          
+ Length:4910646     Length:4910646     Min.   :2022-02-01   Length:4910646    
+ Class :character   Class :character   1st Qu.:2022-06-03   Class :character  
+ Mode  :character   Mode  :character   Median :2022-07-27   Mode  :character  
+                                       Mean   :2022-07-28                     
+                                       3rd Qu.:2022-09-22                     
+                                       Max.   :2023-01-31                     
+     day                year           day_of_week           season         
+ Length:4910646     Length:4910646     Length:4910646     Length:4910646    
+ Class :character   Class :character   Class :character   Class :character  
+ Mode  :character   Mode  :character   Mode  :character   Mode  :character  
+                                                                            
+                                                                            
+                                                                            
+  ride_length     
+ Min.   :      0  
+ 1st Qu.:    356  
+ Median :    626  
+ Mean   :   1223  
+ 3rd Qu.:   1125  
+ Max.   :2483235  
+```
+
 3. Comparar usuarios miembros con usuarios casuales
 
 ```R
 aggregate(trip_data_v2$ride_length ~ trip_data_v2$member_casual, FUN = mean)
+```
+
+| trip_data_v2$member_casual<chr> | trip_data_v2$ride_length<dbl> |      |      |      |
+| :------------------------------ | ----------------------------: | ---- | ---- | ---- |
+| casual                          |                     1893.5996 |      |      |      |
+| member                          |                      764.6096 |      |      |      |
+
+```R
 aggregate(trip_data_v2$ride_length ~ trip_data_v2$member_casual, FUN = median)
+```
+
+|                                 |                               |      |      |      |
+| :------------------------------ | ----------------------------: | ---- | ---- | ---- |
+| trip_data_v2$member_casual<chr> | trip_data_v2$ride_length<dbl> |      |      |      |
+| casual                          |                           809 |      |      |      |
+| member                          |                           532 |      |      |      |
+
+```R
 aggregate(trip_data_v2$ride_length ~ trip_data_v2$member_casual, FUN = max)
+```
+
+|                                 |                               |      |      |      |
+| :------------------------------ | ----------------------------: | ---- | ---- | ---- |
+| trip_data_v2$member_casual<chr> | trip_data_v2$ride_length<dbl> |      |      |      |
+| casual                          |                       2483235 |      |      |      |
+| member                          |                         93594 |      |      |      |
+
+```R
 aggregate(trip_data_v2$ride_length ~ trip_data_v2$member_casual, FUN = min)
 ```
+
+| trip_data_v2$member_casual<chr> | trip_data_v2$ride_length<dbl> |      |      |      |
+| :------------------------------ | ----------------------------: | ---- | ---- | ---- |
+| casual                          |                             0 |      |      |      |
+| member                          |                             0 |      |      |      |
 
 4. Ver el tiempo promedio de viaje por cada usuario miembro frente a cada usario ocasional
 
 ```R
 aggregate(trip_data_v2$ride_length ~ trip_data_v2$member_casual + trip_data_v2$day_of_week, FUN = mean)
 ```
+
+| trip_data_v2$member_casual<chr> | trip_data_v2$day_of_week<chr> | trip_data_v2$ride_length<dbl> |
+| :------------------------------ | :---------------------------- | ----------------------------: |
+| casual                          | Friday                        |                     1832.0665 |
+| member                          | Friday                        |                      753.5736 |
+| casual                          | Monday                        |                     1894.8831 |
+| member                          | Monday                        |                      738.3708 |
+| casual                          | Saturday                      |                     2109.2145 |
+| member                          | Saturday                      |                      857.3403 |
+| casual                          | Sunday                        |                     2218.9022 |
+| member                          | Sunday                        |                      849.1904 |
+| casual                          | Thursday                      |                     1656.1877 |
+| member                          | Thursday                      |                      738.3703 |
+| casual                          | Tuesday                       |                     1676.2554 |
+| member                          | Tuesday                       |                      725.5199 |
+| casual                          | Wednesday                     |                     1598.6149 |
+| member                          | Wednesday                     |                      726.6618 |
 
 5. Notamos que los días de la semana están desordenados, se procede a arreglarlo
 
@@ -303,6 +496,19 @@ trip_data_v2$day_of_week <- ordered(trip_data_v2$day_of_week, levels=c("Sunday",
 aggregate(trip_data_v2$ride_length ~ trip_data_v2$member_casual + trip_data_v2$day_of_week, FUN = mean)
 ```
 
+| trip_data_v2$member_casual<chr> | trip_data_v2$day_of_week<ord> | trip_data_v2$ride_length<dbl> |
+| :------------------------------ | ----------------------------: | ----------------------------: |
+| casual                          |                        Sunday |                     2218.9022 |
+| member                          |                        Sunday |                      849.1904 |
+| casual                          |                        Monday |                     1894.8831 |
+| member                          |                        Monday |                      738.3708 |
+| casual                          |                     Wednesday |                     1598.6149 |
+| member                          |                     Wednesday |                      726.6618 |
+| casual                          |                        Friday |                     1832.0665 |
+| member                          |                        Friday |                      753.5736 |
+| casual                          |                      Saturday |                     2109.2145 |
+| member                          |                      Saturday |                      857.3403 |
+
 7. Analizamos los datos del número de pasajeros por tipo y día de la semana
 
 ```R
@@ -310,9 +516,27 @@ trip_data_v2 %>%
   mutate(weekday = wday(started_at, label = TRUE)) %>%  #Se crea el campo weekday usando wday()
   group_by(member_casual, weekday) %>%  #Se agrupa por member_casual y día de la semana
   summarise(number_of_rides = n(),	#Se calcula el promedio del numero de viajes y la duración 
-    average_duration = mean(ride_length)) %>% # Se calcula la duración promedio
+  average_duration = mean(ride_length)) %>% # Se calcula la duración promedio
   arrange(member_casual, weekday)		
 ```
+
+|                    |              |                      |                       |      |
+| :----------------- | -----------: | -------------------: | --------------------: | ---- |
+| member_casual<chr> | weekday<ord> | number_of_rides<int> | average_duration<dbl> |      |
+| casual             |          Sun |               337778 |             2218.9022 |      |
+| casual             |          Mon |               239351 |             1894.8831 |      |
+| casual             |          Tue |               226682 |             1676.2554 |      |
+| casual             |          Wed |               234362 |             1598.6149 |      |
+| casual             |          Thu |               262779 |             1656.1877 |      |
+| casual             |          Fri |               283978 |             1832.0665 |      |
+| casual             |          Sat |               408482 |             2109.2145 |      |
+| member             |          Sun |               332936 |              849.1904 |      |
+| member             |          Mon |               416066 |              738.3708 |      |
+| member             |          Tue |               461998 |              725.5199 |      |
+| member             |          Wed |               461741 |              726.6618 |      |
+| member             |          Thu |               463438 |              738.3703 |      |
+| member             |          Fri |               404070 |              753.5736 |      |
+| member             |          Sat |               376985 |              857.3403 |      |
 
 ## 5. Compartir
 
