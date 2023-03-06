@@ -427,39 +427,39 @@ summary(trip_data_v2)
 aggregate(trip_data_v2$ride_length ~ trip_data_v2$member_casual, FUN = mean)
 ```
 
-| trip_data_v2$member_casual<chr> | trip_data_v2$ride_length<dbl> |      |      |      |
-| :------------------------------ | ----------------------------: | ---- | ---- | ---- |
-| casual                          |                     1893.5996 |      |      |      |
-| member                          |                      764.6096 |      |      |      |
+| trip_data_v2$member_casual<chr> | trip_data_v2$ride_length<dbl> |
+| :------------------------------ | ----------------------------: |
+| casual                          |                     1893.5996 |
+| member                          |                      764.6096 |
 
 ```R
 aggregate(trip_data_v2$ride_length ~ trip_data_v2$member_casual, FUN = median)
 ```
 
-|                                 |                               |      |      |      |
-| :------------------------------ | ----------------------------: | ---- | ---- | ---- |
-| trip_data_v2$member_casual<chr> | trip_data_v2$ride_length<dbl> |      |      |      |
-| casual                          |                           809 |      |      |      |
-| member                          |                           532 |      |      |      |
+|                                 |                               |
+| :------------------------------ | ----------------------------: |
+| trip_data_v2$member_casual<chr> | trip_data_v2$ride_length<dbl> |
+| casual                          |                           809 |
+| member                          |                           532 |
 
 ```R
 aggregate(trip_data_v2$ride_length ~ trip_data_v2$member_casual, FUN = max)
 ```
 
-|                                 |                               |      |      |      |
-| :------------------------------ | ----------------------------: | ---- | ---- | ---- |
-| trip_data_v2$member_casual<chr> | trip_data_v2$ride_length<dbl> |      |      |      |
-| casual                          |                       2483235 |      |      |      |
-| member                          |                         93594 |      |      |      |
+|                                 |                               |
+| :------------------------------ | ----------------------------: |
+| trip_data_v2$member_casual<chr> | trip_data_v2$ride_length<dbl> |
+| casual                          |                       2483235 |
+| member                          |                         93594 |
 
 ```R
 aggregate(trip_data_v2$ride_length ~ trip_data_v2$member_casual, FUN = min)
 ```
 
-| trip_data_v2$member_casual<chr> | trip_data_v2$ride_length<dbl> |      |      |      |
-| :------------------------------ | ----------------------------: | ---- | ---- | ---- |
-| casual                          |                             0 |      |      |      |
-| member                          |                             0 |      |      |      |
+| trip_data_v2$member_casual<chr> | trip_data_v2$ride_length<dbl> |
+| :------------------------------ | ----------------------------: |
+| casual                          |                             0 |
+| member                          |                             0 |
 
 4. Ver el tiempo promedio de viaje por cada usuario miembro frente a cada usario ocasional
 
@@ -520,7 +520,7 @@ trip_data_v2 %>%
   arrange(member_casual, weekday)		
 ```
 
-|                    |              |                      |                       |      |
+
 | :----------------- | -----------: | -------------------: | --------------------: | ---- |
 | member_casual<chr> | weekday<ord> | number_of_rides<int> | average_duration<dbl> |      |
 | casual             |          Sun |               337778 |             2218.9022 |      |
