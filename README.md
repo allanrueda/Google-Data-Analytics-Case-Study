@@ -736,5 +736,31 @@ trip_data_v2 %>%
 
 ![](img/img-08.png)
 
-## 6.Actuar
+## 6. Actuar
+
+### 6.1 Conclusiones del análisis 
+
+Los datos muestran que se tienen más viajes realizados por los clientes que tienen membresía anual con un 59.41%  frente a los miembros ocasionales con un 40.59%.
+
+Durante los meses de junio, julio y agosto se realizaron el mayor número de viajes tanto de clientes con membresía como ocasionales. El calor puede ser un factor para que los ciclistas quieran viajar en bicicleta. Esto indica que las épocas del año afectan el número de viajes.
+
+Los datos muestran que el sábado y domingo es cuando los clientes ocasionales realizan la mayor cantidad de viajes a comparación de los clientes con membresía, quienes realizan la mayor cantidad de viajes en los días martes, miércoles y jueves. Esto nos indica que utilizan la bicicleta para ir a sus trabajos.
+
+Algo importante que se destaca es que a pesar de que los clientes con membresía realicen más cantidad de viajes, los clientes ocasionales utilizan más minutos para sus viajes, principalmente el sábado y domingo, con un promedio al rededor de 35 min, frente los 14 minutos de los clientes con membresía. Esto ratifica lo expuesto anteriormente, es decir, los clientes con membresía utilizan la bicicleta para ir al trabajo y los usuarios ocasionales utilizan parte de su tiempo libre el fin de semana para realizar sus viajes.
+
+El número de minutos que utilizan los clientes, tanto ocasionales como lo que tienen una membresía, es un patrón que se repite durante todos los meses del año, siendo marzo el mes con más minutos utilizados por los miembros ocasionales. Nuevamente, ratifica el hecho de que los clientes ocasionales pasan más tiempo en sus viajes en bicicleta que los clientes con membresía, quienes utilizan la bicicleta para ir a sus trabajos. 
+
+Los datos muestran que en la temporada invernal los clientes con membresía viajan el menor tiempo con un promedio de 11 min. Mientras que los clientes ocasionales tienen una duración en sus viajes de 26 minutos, lo que indica que los usuarios ocasionales viajan más minutos a pesar de la temporada invernal. Esto puede ser un factor de costos que se debe investigar para concluir si el costo es un factor determinante para obtener una membresía anual.
+
+Finalmente, se puede observar con membresía prefieren utilizar más las bicicletas clásicas que las eléctricas para tener más libertad de movilidad debido a sus trabajos. Por otro lado, los clientes ocasionales prefieren las bicicletas eléctricas seguidas de las clásicas y muy pocas las acopladas. Esto puede indicar que muchos de los clientes ocasionales pueden ser visitantes.
+
+### 6.2 Recomendaciones
+
+Para convertir a miembros anuales los clientes ocasionales, se puede ofrecer un descuento en su primer año de suscripción, debido a la cantidad de minutos que pasan estos clientes en cada viaje. Esto puede ser un beneficio atractivo para animarlos a comprar su membresía anual.
+
+Ofrecer un programa de beneficios una vez que obtienes una membresía anual, por ejemplo, uno de los beneficios puede ser, realizar descuentos después de un cierto número de viajes o tiempo recorrido, o si recomiendas a un amigo o familiar que obtenga una membresía anual pueden obtener descuentos.
+
+La campaña de marketing debe realizarse los días sábado y domingo, principalmente durante la primavera y el verano, ya que estos meses son los que tienen mayor cantidad de viajes de usuarios ocasionales.
+
+Durante la campaña de marketing, se puede informar a los clientes ocasionales que el uso de la bicicleta, principalmente la clásica, tiene muchos beneficios para la salud, de esta manera se da un incentivo para que obtengan una membresía anual. 
 
