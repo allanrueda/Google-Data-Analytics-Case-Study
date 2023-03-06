@@ -521,6 +521,7 @@ trip_data_v2 %>%
 ```
 
 
+|                    |              |                      |                       |      |
 | :----------------- | -----------: | -------------------: | --------------------: | ---- |
 | member_casual<chr> | weekday<ord> | number_of_rides<int> | average_duration<dbl> |      |
 | casual             |          Sun |               337778 |             2218.9022 |      |
