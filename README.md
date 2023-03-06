@@ -1,4 +1,4 @@
-# Caso de estudio Cyclistic - Google Data Analytics
+# Caso Práctico Cyclistic - Análisis de Datos de Google
 ## Autor: Allan Balam Rueda Gutiérrez
 ## Fecha: 04/03/2023
 
@@ -763,4 +763,8 @@ Ofrecer un programa de beneficios una vez que obtienes una membresía anual, por
 La campaña de marketing debe realizarse los días sábado y domingo, principalmente durante la primavera y el verano, ya que estos meses son los que tienen mayor cantidad de viajes de usuarios ocasionales.
 
 Durante la campaña de marketing, se puede informar a los clientes ocasionales que el uso de la bicicleta, principalmente la clásica, tiene muchos beneficios para la salud, de esta manera se da un incentivo para que obtengan una membresía anual. 
+
+### 6.3 Presentación
+
+[Abrir Presentación](https://docs.google.com/presentation/d/14dR4TwcTWFy4gS9NET8xaW8_c-uqqAub6_BeQ9jkTog/edit?usp=sharing)
 
